@@ -62,11 +62,11 @@ function Divs(config, dialog, display)
             {
                 if (config.getAdditionalLatency() > 0)
                 {
-                    window.setTimeout(function() { div.style.backgroundImage = 'url(\'' + config.getHttpServerUrl() + 'GetUpdate.aspx?imgIdx=' + idx + '&noCache=' + new Date().getTime() + '\')'; }, Math.round(config.getAdditionalLatency() / 2));
+                    window.setTimeout(function () { div.style.backgroundImage = 'url(\'' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + '\')'; }, Math.round(config.getAdditionalLatency() / 2));
                 }
                 else
                 {
-                    div.style.backgroundImage = 'url(\'' + config.getHttpServerUrl() + 'GetUpdate.aspx?imgIdx=' + idx + '&noCache=' + new Date().getTime() + '\')';
+                    div.style.backgroundImage = 'url(\'' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + '\')';
                 }
             }
             else

@@ -48,28 +48,47 @@
         <script language="javascript" type="text/javascript" src="js/user/touchscreen.js"></script>
 	</head>
 	
-    <body onload="startMyrtille(
-       '<%=HttpContext.Current.Session.SessionID%>',
-        <%=(RemoteSessionManager != null && (RemoteSessionManager.RemoteSession.State == RemoteSessionState.Connecting || RemoteSessionManager.RemoteSession.State == RemoteSessionState.Connected)).ToString(CultureInfo.InvariantCulture).ToLower()%>,
-        <%=HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPort.ToString()]%>,
-        <%=(HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPortSecured.ToString()] == null ? "null" : HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPortSecured.ToString()])%>,
-        <%=(stat.Value == "Stat enabled").ToString(CultureInfo.InvariantCulture).ToLower()%>,
-        <%=(debug.Value == "Debug enabled").ToString(CultureInfo.InvariantCulture).ToLower()%>,
-        <%=(browser.Value == "HTML4").ToString(CultureInfo.InvariantCulture).ToLower()%>);">
+    <body>
+        <script type="text/javascript">
+            function init() {
+                var httpSessionId = document.getElementById('httpSessionId').value;
+                var remoteSessionActive = document.getElementById('remoteSessionActive').value == 'true';
+                var webSocketPort = Number.parseInt(document.getElementById('webSocketPort').value);
+                var webSocketPortSecured = Number.parseInt(document.getElementById('webSocketPortSecured').value) || "null";
+                var statEnabled = document.getElementById('statEnabled').value == 'true';
+                var debugEnabled = document.getElementById('debugEnabled').value == 'true';
+                var compatibilityMode = document.getElementById('compatibilityMode').value == 'true';
+                startMyrtille(httpSessionId, remoteSessionActive, webSocketPort, webSocketPortSecured, statEnabled, debugEnabled, compatibilityMode);
+            }
+        </script>
 
         <form method="post" runat="server" id="mainForm">
+            <div class="controlDiv" style="left:0;">
+                <span class="controlLabel">httpSessionId</span><input type="text" class="controlText" id="httpSessionId" value="<%=sessionId.Value%>" />
+                <span class="controlLabel">remoteSessionActive</span><input type="text" class="controlText" id="remoteSessionActive" value="<%=JustConnected.ToString().ToLower()%>" />
+                <span class="controlLabel">webSocketPort</span><input type="text" class="controlText" id="webSocketPort" value="<%=HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPort.ToString()]%>" />
+                <span class="controlLabel">webSocketPortSecured</span><input type="text" class="controlText" id="webSocketPortSecured" value="<%=(HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPortSecured.ToString()] == null ? "null" : HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPortSecured.ToString()])%>" />
+                <span class="controlLabel">statEnabled</span><input type="text" class="controlText" id="statEnabled" value="<%=(stat.Value == "Stat enabled").ToString(CultureInfo.InvariantCulture).ToLower()%>" />
+                <span class="controlLabel">debugEnabled</span><input type="text" class="controlText" id="debugEnabled" value="<%=(debug.Value == "Debug enabled").ToString(CultureInfo.InvariantCulture).ToLower()%>" />
+                <span class="controlLabel">compatibilityMode</span><input type="text" class="controlText" id="compatibilityMode" value="<%=(browser.Value == "HTML4").ToString(CultureInfo.InvariantCulture).ToLower()%>" />
+                <input type="button" class="controlButton" value="Init" onclick="init();"/>
+            </div>
 
             <div runat="server" id="controlDiv" class="controlDiv">
 
                 <%-- connection settings --%>
-                <span runat="server" id="serverLabel" class="controlLabel">Server</span><input type="text" runat="server" id="server" class="controlText" title="server address"/>
-                <span runat="server" id="domainLabel" class="controlLabel">Domain (optional)</span><input type="text" runat="server" id="domain" class="controlText" title="user domain"/>
-                <span runat="server" id="userLabel" class="controlLabel">User</span><input type="text" runat="server" id="user" class="controlText" title="user name"/>
-                <span runat="server" id="passwordLabel" class="controlLabel">Password</span><input type="password" runat="server" id="password" class="controlText" title="user password"/>
-                <span runat="server" id="statsLabel" class="controlLabel">Stats</span><select runat="server" id="stat" class="controlSelect" title="display stats bar"><option selected="selected">Stat disabled</option><option>Stat enabled</option></select>
-                <span runat="server" id="debugLabel" class="controlLabel">Debug</span><select runat="server" id="debug" class="controlSelect" title="display debug info and save session logs"><option selected="selected">Debug disabled</option><option>Debug enabled</option></select>
-                <span runat="server" id="browserLabel" class="controlLabel">Browser</span><select runat="server" id="browser" class="controlSelect" title="rendering mode"><option>HTML4</option><option selected="selected">HTML5</option></select>
-                <span runat="server" id="programLabel" class="controlLabel">Program to run (optional)</span><input type="text" runat="server" id="program" class="controlText" title="executable path, name and parameters (double quotes must be escaped)"/>
+                <div style="display:none">
+                    <span runat="server" id="serverLabel" class="controlLabel">Server</span><input type="text" runat="server" id="server" class="controlText" title="server address" value="192.168.1.107"/>
+                    <span runat="server" id="domainLabel" class="controlLabel">Domain (optional)</span><input type="text" runat="server" id="domain" class="controlText" title="user domain" value="abcconsulting"/>
+                    <span runat="server" id="userLabel" class="controlLabel">User</span><input type="text" runat="server" id="user" class="controlText" title="user name" value="PMartinez"/>
+                    <span runat="server" id="passwordLabel" class="controlLabel">Password</span><input type="password" runat="server" id="password" class="controlText" title="user password" value="abcconsulting1"/>
+                    <span runat="server" id="statsLabel" class="controlLabel">Stats</span><select runat="server" id="stat" class="controlSelect" title="display stats bar"><option selected="selected">Stat disabled</option><option>Stat enabled</option></select>
+                    <span runat="server" id="debugLabel" class="controlLabel">Debug</span><select runat="server" id="debug" class="controlSelect" title="display debug info and save session logs"><option selected="selected">Debug disabled</option><option>Debug enabled</option></select>
+                    <span runat="server" id="browserLabel" class="controlLabel">Browser</span><select runat="server" id="browser" class="controlSelect" title="rendering mode"><option>HTML4</option><option selected="selected">HTML5</option></select>
+                    <span runat="server" id="programLabel" class="controlLabel">Program to run (optional)</span><input type="text" runat="server" id="program" class="controlText" title="executable path, name and parameters (double quotes must be escaped)"/>
+                </div>
+
+                <input type="hidden" runat="server" id="sessionId"/>
                 <input type="hidden" runat="server" id="width"/>
                 <input type="hidden" runat="server" id="height"/>
                 <input type="submit" runat="server" id="connect" class="controlButton" value="Connect!" onclick="setClientResolution();" onserverclick="ConnectButtonClick" title="open session"/>

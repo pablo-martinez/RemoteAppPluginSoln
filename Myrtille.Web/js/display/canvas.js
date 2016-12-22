@@ -100,11 +100,11 @@ function Canvas(config, dialog, display)
             {
                 if (config.getAdditionalLatency() > 0)
                 {
-                    window.setTimeout(function() { img.src = config.getHttpServerUrl() + 'GetUpdate.aspx?imgIdx=' + idx + '&noCache=' + new Date().getTime(); }, Math.round(config.getAdditionalLatency() / 2));
+                    window.setTimeout(function () { img.src = config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime(); }, Math.round(config.getAdditionalLatency() / 2));
                 }
                 else
                 {
-                    img.src = config.getHttpServerUrl() + 'GetUpdate.aspx?imgIdx=' + idx + '&noCache=' + new Date().getTime();
+                    img.src = config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime();
                 }
             }
             else

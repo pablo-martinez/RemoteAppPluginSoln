@@ -217,11 +217,11 @@ function Display(config, dialog)
             {
                 if (config.getAdditionalLatency() > 0)
                 {
-                    window.setTimeout(function() { document.body.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto'; }, Math.round(config.getAdditionalLatency() / 2));
+                    window.setTimeout(function () { document.body.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto'; }, Math.round(config.getAdditionalLatency() / 2));
                 }
                 else
                 {
-                    document.body.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto';
+                    document.body.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto';
                 }
             }
             else

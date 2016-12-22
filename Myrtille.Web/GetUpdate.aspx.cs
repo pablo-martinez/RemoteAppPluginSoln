@@ -17,6 +17,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 
@@ -40,8 +41,14 @@ namespace Myrtille.Web
 
             try
             {
-                // retrieve the remote session manager for the current http session
-                remoteSessionManager = (RemoteSessionManager)HttpContext.Current.Session[HttpSessionStateVariables.RemoteSessionManager.ToString()];
+                var sessionId = HttpContext.Current.Request.QueryString["sessionId"];
+
+                // retrieve the remote session manager for requested session
+                var remoteSessionsManagers = (Dictionary<string, RemoteSessionManager>)HttpContext.Current.Application[HttpApplicationStateVariables.RemoteSessionsManagers.ToString()];
+                if (remoteSessionsManagers.ContainsKey(sessionId))
+                {
+                    remoteSessionManager = remoteSessionsManagers[sessionId];
+                }
             }
             catch (Exception exc)
             {

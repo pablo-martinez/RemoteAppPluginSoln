@@ -17,6 +17,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 
@@ -41,8 +42,14 @@ namespace Myrtille.Web
 
             try
             {
-                // retrieve the remote session manager for the current http session
-                remoteSessionManager = (RemoteSessionManager)HttpContext.Current.Session[HttpSessionStateVariables.RemoteSessionManager.ToString()];
+                var sessionId = HttpContext.Current.Request.QueryString["sessionId"];
+
+                // retrieve the remote session manager for requested session
+                var remoteSessionsManagers = (Dictionary<string, RemoteSessionManager>)HttpContext.Current.Application[HttpApplicationStateVariables.RemoteSessionsManagers.ToString()];
+                if (remoteSessionsManagers.ContainsKey(sessionId))
+                {
+                    remoteSessionManager = remoteSessionsManagers[sessionId];
+                }
             }
             catch (Exception exc)
             {
@@ -58,12 +65,15 @@ namespace Myrtille.Web
 
                 // if a websocket is set at this step, the client had probably changed the rendering mode (html5 -> html4) or configuration while the remote session is active, then reloaded the page (F5)
                 // close the websocket (a new one will be set if the client change back to html5 again...)
+
+                /* We're now handling multiple sockets per RemoteSessionManager, so we cannot guarantee the socket is not being used
                 if (remoteSessionManager.WebSocket != null)
                 {
                     System.Diagnostics.Trace.TraceInformation("Removing no longer used websocket (the client had probably changed the rendering mode from HTML5 to HTML4 then reloaded the page (F5)), remote session {0}", remoteSessionManager.RemoteSession.Id);
                     remoteSessionManager.WebSocket.Close();
                     remoteSessionManager.WebSocket = null;
                 }
+                */
 
                 // stream image(s) data within the response for the given duration
                 // the connection will be automatically reseted by the client when the request ends

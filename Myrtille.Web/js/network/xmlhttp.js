@@ -131,7 +131,8 @@ function XmlHttp(config, dialog, display, network)
             xhrStartTime = startTime;
 
             xhr.open('GET', config.getHttpServerUrl() + 'SendInputs.aspx' +
-                '?data=' + (data == null ? '' : data) +
+                '?sessionId=' + config.getHttpSessionId() +
+                '&data=' + (data == null ? '' : data) +
                 '&fsu=' + (data == null ? 1 : 0) +
                 '&imgIdx=' + display.getImgIdx() +
                 '&imgEncoding=' + config.getImageEncoding() +

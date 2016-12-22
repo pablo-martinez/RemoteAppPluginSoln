@@ -25,6 +25,8 @@ using System.Web;
 using System.Web.Caching;
 using Myrtille.Fleck;
 using Myrtille.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Myrtille.Web
 {
@@ -50,7 +52,7 @@ namespace Myrtille.Web
                 Pipes.ProcessUpdatesPipeMessage = ProcessUpdatesPipeMessage;
 
                 // sockets
-                WebSocket = null;
+                WebSockets = new List<IWebSocketConnection>();
 
                 // events
                 ImageEventLock = new object();
@@ -100,16 +102,19 @@ namespace Myrtille.Web
                 else if (message.StartsWith("clipboard|"))
                 {
                     // if using a websocket, send the clipboard directly
-                    if (WebSocket != null)
+                    if (WebSockets.Count > 0)
                     {
-                        if (WebSocket.IsAvailable)
+                        foreach (var webSocket in WebSockets)
                         {
-                            Trace.TraceInformation("Sending clipboard content {0} on websocket, remote session {1}", message, RemoteSession.Id);
-                            WebSocket.Send(message);
-                        }
-                        else
-                        {
-                            Trace.TraceInformation("Websocket is unavailable (connection closed by client?), remote session {0}, status: {1}", RemoteSession.Id, RemoteSession.State);
+                            if (webSocket.IsAvailable)
+                            {
+                                Trace.TraceInformation("Sending clipboard content {0} on websocket, remote session {1}", message, RemoteSession.Id);
+                                webSocket.Send(message);
+                            }
+                            else
+                            {
+                                Trace.TraceInformation("Websocket is unavailable (connection closed by client?), remote session {0}, status: {1}", RemoteSession.Id, RemoteSession.State);
+                            }
                         }
                     }
                     // otherwise store it (will be retrieved later)
@@ -135,7 +140,7 @@ namespace Myrtille.Web
 
         #region Sockets
 
-        public IWebSocketConnection WebSocket { get; set; }
+        public List<IWebSocketConnection> WebSockets { get; set; }
 
         #endregion
 
@@ -280,26 +285,29 @@ namespace Myrtille.Web
                 }
 
                 // if using a websocket, send the image
-                if (WebSocket != null)
+                if (WebSockets.Count > 0)
                 {
-                    if (WebSocket.IsAvailable)
+                    foreach (var webSocket in WebSockets)
                     {
-                        Trace.TraceInformation("Sending image {0} ({1}) on websocket, remote session {2}", image.Idx, (image.Fullscreen ? "screen" : "region"), RemoteSession.Id);
+                        if (webSocket.IsAvailable)
+                        {
+                            Trace.TraceInformation("Sending image {0} ({1}) on websocket, remote session {2}", image.Idx, (image.Fullscreen ? "screen" : "region"), RemoteSession.Id);
 
-                        WebSocket.Send(
-                            image.Idx + "," +
-                            image.PosX + "," +
-                            image.PosY + "," +
-                            image.Width + "," +
-                            image.Height + "," +
-                            image.Format.ToString().ToLower() + "," +
-                            image.Quality + "," +
-                            image.Base64Data + "," +
-                            image.Fullscreen.ToString().ToLower());
-                    }
-                    else
-                    {
-                        Trace.TraceInformation("Websocket is unavailable (connection closed by client?), remote session {0}, status: {1}", RemoteSession.Id, RemoteSession.State);
+                            webSocket.Send(
+                                image.Idx + "," +
+                                image.PosX + "," +
+                                image.PosY + "," +
+                                image.Width + "," +
+                                image.Height + "," +
+                                image.Format.ToString().ToLower() + "," +
+                                image.Quality + "," +
+                                image.Base64Data + "," +
+                                image.Fullscreen.ToString().ToLower());
+                        }
+                        else
+                        {
+                            Trace.TraceInformation("Websocket is unavailable (connection closed by client?), remote session {0}, status: {1}", RemoteSession.Id, RemoteSession.State);
+                        }
                     }
                 }
                 // otherwise cache it (will be retrieved later)
@@ -471,10 +479,10 @@ namespace Myrtille.Web
             {
                 Pipes.DeletePipes();
             }
-            if (WebSocket != null)
+            foreach(var webSocket in WebSockets.ToList())
             {
-                WebSocket.Close();
-                WebSocket = null;
+                webSocket.Close();
+                WebSockets.Remove(webSocket);
             }
         }
 

@@ -100,11 +100,14 @@ namespace Myrtille.Web
                 }
 
                 // if a websocket is set and available (connection not closed by client), send a disconnect notification
-                if (_remoteSessionManager.WebSocket != null)
+                if (_remoteSessionManager.WebSockets.Count > 0)
                 {
-                    if (_remoteSessionManager.WebSocket.IsAvailable)
+                    foreach(var webSocket in _remoteSessionManager.WebSockets)
                     {
-                        _remoteSessionManager.WebSocket.Send("disconnected");
+                        if (webSocket.IsAvailable)
+                        {
+                            webSocket.Send("disconnected");
+                        }
                     }
                 }
                 // no websocket at this step can mean using xhr (with long-polling or not),

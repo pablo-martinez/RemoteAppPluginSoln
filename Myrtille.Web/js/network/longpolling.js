@@ -87,7 +87,8 @@ function LongPolling(config, dialog, display, network)
             //dialog.showDebug('loading long-polling iframe');
 
             lpIFrame.src = config.getHttpServerUrl() + 'PushUpdates.aspx' +
-                '?longPollingDuration=' + config.getLongPollingDuration() +
+                '?sessionId=' + config.getHttpSessionId() +
+                '&longPollingDuration=' + config.getLongPollingDuration() +
                 '&imgIdx=' + display.getImgIdx() +
                 '&noCache=' + new Date().getTime();
 	    }

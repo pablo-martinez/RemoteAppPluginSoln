@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Myrtille.Fleck;
+using System.Linq;
 
 namespace Myrtille.Web
 {
@@ -162,12 +163,7 @@ namespace Myrtille.Web
                                     return;
                                 }
 
-                                if (remoteSessionManager.WebSocket != null)
-                                {
-                                    remoteSessionManager.WebSocket.Close();
-                                }
-
-                                remoteSessionManager.WebSocket = socket;
+                                remoteSessionManager.WebSockets.Add(socket);
                             }
 
                             // image encoding
@@ -210,10 +206,10 @@ namespace Myrtille.Web
                         // remote session has been disconnected; close the websocket
                         case "close":
 
-                            if (remoteSessionManager.WebSocket != null)
+                            foreach(var webSocket in remoteSessionManager.WebSockets.ToList())
                             {
-                                remoteSessionManager.WebSocket.Close();
-                                remoteSessionManager.WebSocket = null;
+                                webSocket.Close();
+                                remoteSessionManager.WebSockets.Remove(webSocket);
                             }
 
                             break;

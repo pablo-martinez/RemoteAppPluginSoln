@@ -31,6 +31,21 @@ namespace Myrtille.Web
     {
         protected RemoteSessionManager RemoteSessionManager;
 
+        Dictionary<string, RemoteSessionManager> _remoteSessionManagers;
+        protected Dictionary<string, RemoteSessionManager> RemoteSessionManagers
+        {
+            get
+            {
+                if (_remoteSessionManagers == null)
+                {
+                    _remoteSessionManagers = (Dictionary<string, RemoteSessionManager>)HttpContext.Current.Application[HttpApplicationStateVariables.RemoteSessionsManagers.ToString()];
+                }
+                return _remoteSessionManagers;
+            }
+        }
+
+        protected bool JustConnected { get; set; }
+
         /// <summary>
         /// initialization
         /// </summary>
@@ -175,9 +190,6 @@ namespace Myrtille.Web
                 {
                     HttpContext.Current.Application.Lock();
 
-                    // unset the remote session manager for the current http session
-                    HttpContext.Current.Session[HttpSessionStateVariables.RemoteSessionManager.ToString()] = null;
-
                     // unregister it at application level; used when there is no http context (i.e.: websockets)
                     var remoteSessionsManagers = (Dictionary<string, RemoteSessionManager>)HttpContext.Current.Application[HttpApplicationStateVariables.RemoteSessionsManagers.ToString()];
                     if (remoteSessionsManagers.ContainsKey(HttpContext.Current.Session.SessionID))
@@ -228,12 +240,10 @@ namespace Myrtille.Web
                         }
                     );
 
-                    // set the remote session manager for the current http session
-                    HttpContext.Current.Session[HttpSessionStateVariables.RemoteSessionManager.ToString()] = RemoteSessionManager;
-
                     // register it at application level; used when there is no http context (i.e.: websockets)
-                    var remoteSessionsManagers = (Dictionary<string, RemoteSessionManager>)HttpContext.Current.Application[HttpApplicationStateVariables.RemoteSessionsManagers.ToString()];
-                    remoteSessionsManagers[HttpContext.Current.Session.SessionID] = RemoteSessionManager;
+                    var newSessionId = Guid.NewGuid().ToString().Substring(0, 8);
+                    RemoteSessionManagers.Add(newSessionId, RemoteSessionManager);
+                    sessionId.Value = newSessionId;
 
                     // update the remote sessions auto-increment counter
                     HttpContext.Current.Application[HttpApplicationStateVariables.RemoteSessionsCounter.ToString()] = remoteSessionsCounter;
@@ -272,6 +282,8 @@ namespace Myrtille.Web
                         RemoteSessionManager.RemoteSession.ClientHeight,
                         RemoteSessionManager.RemoteSession.Program,
                         RemoteSessionManager.RemoteSession.DebugMode);
+
+                    JustConnected = true;
 
                     // update controls
                     UpateControls();

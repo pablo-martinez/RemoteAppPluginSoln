@@ -1,0 +1,4 @@
+Here goes all myrtille log files (gateway, services, RDP).
+
+CAUTION! logging requires the ASP.NET IIS worker process to have write permission to the "log" folder.
+Among other options, you may grant the myrtille application pool ("IIS AppPool\MyrtilleAppPool") write permission to it (normally automatically set by the myrtille installer).

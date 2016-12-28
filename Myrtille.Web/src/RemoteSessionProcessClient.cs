@@ -21,6 +21,9 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading;
 using Myrtille.Services.Contracts;
+using System.Collections.Generic;
+using System.Web;
+using System.Linq;
 
 namespace Myrtille.Web
 {
@@ -125,6 +128,8 @@ namespace Myrtille.Web
                         }
                     }
                 }
+
+                RemoteSessionManager.CurrentSessions.Remove(_remoteSessionManager.RemoteSession.SessionId);
             }
             catch (Exception exc)
             {

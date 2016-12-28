@@ -21,6 +21,7 @@ namespace Myrtille.Web
     public class RemoteSession
     {
         public int Id;
+        public string SessionId;
         public RemoteSessionState State;
         public string ServerAddress;
         public string UserDomain;

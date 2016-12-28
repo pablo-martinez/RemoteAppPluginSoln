@@ -124,8 +124,7 @@ namespace Myrtille.Web
                 try
                 {
                     // retrieve the remote session manager for the given http session (the http session id is passed as parameter as the ws protocol doesn't pass it automatically)
-                    var remoteSessionsManagers = (IDictionary<string, RemoteSessionManager>)_global.Application[HttpApplicationStateVariables.RemoteSessionsManagers.ToString()];
-                    remoteSessionManager = remoteSessionsManagers[httpSessionId];
+                    remoteSessionManager = RemoteSessionManager.CurrentSessions[httpSessionId];
                 }
                 catch (Exception exc)
                 {

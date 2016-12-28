@@ -66,6 +66,9 @@ namespace Myrtille.Services
                 {
                     var pathParts = AppDomain.CurrentDomain.BaseDirectory.Split(new[] { @"\" }, StringSplitOptions.RemoveEmptyEntries);
                     _process.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Myrtille.RDP\FreeRDP", pathParts[pathParts.Length - 1], "wfreerdp.exe");
+
+                    // I just want to use the installation path
+                    //_process.StartInfo.FileName = Path.Combine(@"C:\Program Files (x86)\Myrtille\bin", "wfreerdp.exe");
                 }
                 else
                 {
@@ -109,7 +112,8 @@ namespace Myrtille.Services
                     " -async-transport" +                                                                           // async transport
                     " /clipboard" +                                                                                 // clipboard support
                     " /audio-mode:2" +                                                                              // audio mode (not supported for now, 2: do not play)
-                    (string.IsNullOrEmpty(program) ? string.Empty : " /shell:\"" + program + "\"");                 // program to run
+                    (string.IsNullOrEmpty(program) ? string.Empty : " /app:" + "\"||" + program + "\"");            // RemoteApp
+                    //(string.IsNullOrEmpty(program) ? string.Empty : " /shell:\"" + program + "\"");                 // program to run
 
                 if (!Environment.UserInteractive)
                 {

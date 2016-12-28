@@ -1,0 +1,14 @@
+﻿<div>
+    <h3>New session</h3>
+    <div class="container-fluid">
+        <div class="row" ng-repeat="config in left.availableConfigs" style="margin: 10px auto">
+            <div>{{config.UserName}}</div><button ng-repeat="program in config.Programs" ng-click="left.startConnection(config.ID, program);"><img style="width:25px;height:25px;" ng-src="/Myrtille/img/program/{{program || 'rdp'}}.png" /></button>
+        </div>
+    </div>
+
+    <h3>Join session</h3>
+    <div class="container-fluid" ng-show="left.currentSessions.length">
+        <div class="row"  style="margin: 10px auto" ng-repeat="session in left.currentSessions"><button ng-click="left.joinConnection(session);">Join {{session}}</button></div>
+    </div>
+    <span ng-hide="left.currentSessions.length">No current sessions</span>
+</div>

@@ -104,7 +104,7 @@ function startMyrtille(httpSessionId, remoteSessionActive, webSocketPort, webSoc
             }
         }
     
-        var httpServerUrl = window.location.protocol + '//' + window.location.hostname + '/' + pathname + '/';
+        var httpServerUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ":" + window.location.port : "") + '/' + pathname + '/';
         //alert('http server url: ' + httpServerUrl);
 
         /*
@@ -113,13 +113,14 @@ function startMyrtille(httpSessionId, remoteSessionActive, webSocketPort, webSoc
         the drawback of posting a form is the browser asks the user to confirm the form data resubmission if the page is reloaded, which is a little boring and is a problem if the page needs to be reloaded automatically (ie: DOM cleaning, session disconnected, etc.)
         to avoid that and still preserve security, the connection settings are saved server side (within the http session) and the page is reloaded with an empty querystring below
         */
+        /*
         if (window.location.href.indexOf('?') == -1)
         {
             //alert('reloading page with empty querystring');
             window.location.href = httpServerUrl + '?';
             return;
         }
-
+        */
         myrtille = new Myrtille(httpServerUrl, httpSessionId, webSocketPort, webSocketPortSecured, statEnabled, debugEnabled, compatibilityMode);
         myrtille.init();
 

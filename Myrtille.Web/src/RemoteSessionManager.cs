@@ -32,6 +32,16 @@ namespace Myrtille.Web
 {
     public class RemoteSessionManager : IDisposable
     {
+        public static Dictionary<string, RemoteSessionManager> CurrentSessions { get; } = new Dictionary<string, RemoteSessionManager>();
+
+
+        // note that it doesn't really count the active remote sessions... it's just an auto-increment for the remote session id, ensuring it's unique...
+        // the active remote sessions are registered in CurrentSessions; count can be retrieved from there
+        static int _remoteSessionsCounter = 1;
+        
+        // auto-increment the remote sessions counter
+        public static int NewId { get { return _remoteSessionsCounter++; } }
+
         #region Init
 
         public RemoteSession RemoteSession { get; private set; }

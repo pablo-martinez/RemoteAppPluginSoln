@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Myrtille.Common\Log\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
@@ -83,6 +87,21 @@
     </Compile>
     <Compile Include="FileStorage.aspx.designer.cs">
       <DependentUpon>FileStorage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentSessions.aspx.cs">
+      <DependentUpon>CurrentSessions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CurrentSessions.aspx.designer.cs">
+      <DependentUpon>CurrentSessions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\SessionConfig.cs" />
+    <Compile Include="StartConnection.aspx.cs">
+      <DependentUpon>StartConnection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StartConnection.aspx.designer.cs">
+      <DependentUpon>StartConnection.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\RemoteSession.cs" />
     <Compile Include="src\RemoteSessionCommand.cs" />
@@ -159,9 +178,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\Default.css" />
     <Content Include="FileStorage.aspx" />
     <Content Include="img\bandwidthTest.png" />
+    <Content Include="img\program\calc.png" />
+    <Content Include="img\program\chrome.png" />
+    <Content Include="img\program\notepad.png" />
+    <Content Include="img\program\rdp.png" />
     <Content Include="img\test.webp" />
+    <Content Include="js\app\app.js" />
+    <Content Include="js\app\main\controllers\rightController.js" />
+    <Content Include="js\app\main\controllers\mainController.js" />
+    <Content Include="js\app\main\controllers\leftController.js" />
+    <Content Include="js\app\RemoteDesktop\services\RemoteDesktop.js" />
+    <Content Include="js\bootstrap\ui-bootstrap-tpls-2.3.2.min.js" />
     <Content Include="js\config.js" />
     <Content Include="js\display\canvas.js" />
     <Content Include="js\display\divs.js" />
@@ -174,9 +204,15 @@
     <Content Include="js\network\xmlhttp.js" />
     <Content Include="js\user\touchscreen.js" />
     <Content Include="RemoteClipboard.aspx" />
+    <Content Include="CurrentSessions.aspx" />
+    <Content Include="StartConnection.aspx" />
     <Content Include="ShowDialog.aspx" />
+    <Content Include="templates\partial-home-right.html" />
+    <Content Include="templates\partial-home-left.html" />
+    <Content Include="templates\partial-home-main.html" />
+    <Content Include="templates\partial-home.html" />
     <Content Include="VirtualKeyboard.aspx" />
-    <Content Include="css\Default.css" />
+    <Content Include="css\myrtille.css" />
     <Content Include="Global.asax" />
     <Content Include="js\myrtille.js" />
     <Content Include="Default.aspx" />
@@ -192,6 +228,7 @@
     </Content>
     <Content Include="log\README" />
     <Content Include="ssl\README" />
+    <Content Include="packages.config" />
     <None Include="Web.Base.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

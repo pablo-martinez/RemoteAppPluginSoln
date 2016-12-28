@@ -1,22 +1,4 @@
-﻿<%--
-    Myrtille: A native HTML4/5 Remote Desktop Protocol client.
-
-    Copyright (c) 2014-2016 Cedric Coste
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-	    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
---%>
-
-<%@ Page Language="C#" Inherits="Myrtille.Web.Default" Codebehind="Default.aspx.cs" AutoEventWireup="true" Culture="auto" UICulture="auto" %>
+﻿<%@ Page Language="C#" Inherits="Myrtille.Web.Default" Codebehind="Default.aspx.cs" AutoEventWireup="true" Culture="auto" UICulture="auto" %>
 <%@ OutputCache Location="None" %>
 <%@ Import Namespace="System.Globalization" %>
 <%@ Import Namespace="Myrtille.Web" %>
@@ -31,6 +13,12 @@
         <meta name="viewport" content="initial-scale=1.0"/>
         <title>Myrtille</title>
         <link rel="stylesheet" type="text/css" href="css/Default.css"/>
+        <link rel="stylesheet" type="text/css" href="css/myrtille.css"/>
+        <!-- Bootstrap Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
         <script language="javascript" type="text/javascript" src="js/myrtille.js"></script>
         <script language="javascript" type="text/javascript" src="js/config.js"></script>
         <script language="javascript" type="text/javascript" src="js/dialog.js"></script>
@@ -46,92 +34,34 @@
         <script language="javascript" type="text/javascript" src="js/user/keyboard.js"></script>
         <script language="javascript" type="text/javascript" src="js/user/mouse.js"></script>
         <script language="javascript" type="text/javascript" src="js/user/touchscreen.js"></script>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+
+        <!-- Bootstrap -->
+        <!-- <script language="javascript" type="text/javascript" src="js/bootstrap/ui-bootstrap-tpls-2.3.2.min.js"></script> -->
+        
+
+        <%--<script language="javascript" type="text/javascript" src="//code.jquery.com/jquery-3.1.1.slim.min.js"></script> --%>
+        <script language="javascript" type="text/javascript" src="js/app/app.js"></script>
+
+        <script language="javascript" type="text/javascript" src="js/app/RemoteDesktop/services/RemoteDesktop.js"></script>
+
+        <script language="javascript" type="text/javascript" src="js/app/main/controllers/leftController.js"></script>
+        <script language="javascript" type="text/javascript" src="js/app/main/controllers/mainController.js"></script>
+        <script language="javascript" type="text/javascript" src="js/app/main/controllers/rightController.js"></script>
+
 	</head>
-	
-    <body>
+	<body ng-app="myrtille" class="container-fluid">
         <script type="text/javascript">
-            function init() {
-                var httpSessionId = document.getElementById('httpSessionId').value;
-                var remoteSessionActive = document.getElementById('remoteSessionActive').value == 'true';
-                var webSocketPort = Number.parseInt(document.getElementById('webSocketPort').value);
-                var webSocketPortSecured = Number.parseInt(document.getElementById('webSocketPortSecured').value) || "null";
-                var statEnabled = document.getElementById('statEnabled').value == 'true';
-                var debugEnabled = document.getElementById('debugEnabled').value == 'true';
-                var compatibilityMode = document.getElementById('compatibilityMode').value == 'true';
-                startMyrtille(httpSessionId, remoteSessionActive, webSocketPort, webSocketPortSecured, statEnabled, debugEnabled, compatibilityMode);
-            }
+            var availableConfigs = <%=Newtonsoft.Json.JsonConvert.SerializeObject(SessionConfig.AvailableConfigs.Select(x => new { x.ID, x.UserName, x.Programs })) %>;
         </script>
-
-        <form method="post" runat="server" id="mainForm">
-            <div class="controlDiv" style="left:0;">
-                <span class="controlLabel">httpSessionId</span><input type="text" class="controlText" id="httpSessionId" value="<%=sessionId.Value%>" />
-                <span class="controlLabel">remoteSessionActive</span><input type="text" class="controlText" id="remoteSessionActive" value="<%=JustConnected.ToString().ToLower()%>" />
-                <span class="controlLabel">webSocketPort</span><input type="text" class="controlText" id="webSocketPort" value="<%=HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPort.ToString()]%>" />
-                <span class="controlLabel">webSocketPortSecured</span><input type="text" class="controlText" id="webSocketPortSecured" value="<%=(HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPortSecured.ToString()] == null ? "null" : HttpContext.Current.Application[HttpApplicationStateVariables.WebSocketServerPortSecured.ToString()])%>" />
-                <span class="controlLabel">statEnabled</span><input type="text" class="controlText" id="statEnabled" value="<%=(stat.Value == "Stat enabled").ToString(CultureInfo.InvariantCulture).ToLower()%>" />
-                <span class="controlLabel">debugEnabled</span><input type="text" class="controlText" id="debugEnabled" value="<%=(debug.Value == "Debug enabled").ToString(CultureInfo.InvariantCulture).ToLower()%>" />
-                <span class="controlLabel">compatibilityMode</span><input type="text" class="controlText" id="compatibilityMode" value="<%=(browser.Value == "HTML4").ToString(CultureInfo.InvariantCulture).ToLower()%>" />
-                <input type="button" class="controlButton" value="Init" onclick="init();"/>
-            </div>
-
-            <div runat="server" id="controlDiv" class="controlDiv">
-
-                <%-- connection settings --%>
-                <div style="display:none">
-                    <span runat="server" id="serverLabel" class="controlLabel">Server</span><input type="text" runat="server" id="server" class="controlText" title="server address" value="192.168.1.107"/>
-                    <span runat="server" id="domainLabel" class="controlLabel">Domain (optional)</span><input type="text" runat="server" id="domain" class="controlText" title="user domain" value="abcconsulting"/>
-                    <span runat="server" id="userLabel" class="controlLabel">User</span><input type="text" runat="server" id="user" class="controlText" title="user name" value="PMartinez"/>
-                    <span runat="server" id="passwordLabel" class="controlLabel">Password</span><input type="password" runat="server" id="password" class="controlText" title="user password" value="abcconsulting1"/>
-                    <span runat="server" id="statsLabel" class="controlLabel">Stats</span><select runat="server" id="stat" class="controlSelect" title="display stats bar"><option selected="selected">Stat disabled</option><option>Stat enabled</option></select>
-                    <span runat="server" id="debugLabel" class="controlLabel">Debug</span><select runat="server" id="debug" class="controlSelect" title="display debug info and save session logs"><option selected="selected">Debug disabled</option><option>Debug enabled</option></select>
-                    <span runat="server" id="browserLabel" class="controlLabel">Browser</span><select runat="server" id="browser" class="controlSelect" title="rendering mode"><option>HTML4</option><option selected="selected">HTML5</option></select>
-                    <span runat="server" id="programLabel" class="controlLabel">Program to run (optional)</span><input type="text" runat="server" id="program" class="controlText" title="executable path, name and parameters (double quotes must be escaped)"/>
-                </div>
-
-                <input type="hidden" runat="server" id="sessionId"/>
-                <input type="hidden" runat="server" id="width"/>
-                <input type="hidden" runat="server" id="height"/>
-                <input type="submit" runat="server" id="connect" class="controlButton" value="Connect!" onclick="setClientResolution();" onserverclick="ConnectButtonClick" title="open session"/>
-                <input type="button" runat="server" id="disconnect" value="Disconnect" visible="false" onserverclick="DisconnectButtonClick" title="close session"/>
-
-                <%-- virtual keyboard. on devices without a physical keyboard, forces the device virtual keyboard to pop up --%>
-                <input type="button" runat="server" id="keyboard" value="Keyboard" visible="false" onclick="openPopup('virtualKeyboardPopup', 'VirtualKeyboard.aspx');" title="send text to the remote session"/>
-
-                <%-- remote clipboard. display the remote clipboard content and allow to copy it locally (text only) --%>
-                <input type="button" runat="server" id="clipboard" value="Clipboard" visible="false" onclick="doXhrCall('RemoteClipboard.aspx');" title="retrieve the remote clipboard content (text only)"/>
-
-                <%-- upload/download file(s). only enabled if the connected server is localhost or if a domain is specified (so file(s) can be accessed within the rdp session) --%>
-                <input type="button" runat="server" id="files" value="My Documents" visible="false" onclick="openPopup('fileStoragePopup', 'FileStorage.aspx');" title="upload/download files to/from the user documents folder"/>
-
-                <%-- send ctrl+alt+del to the rdp session. may be useful to change the user password, for example --%>
-                <input type="button" runat="server" id="cad" value="Ctrl+Alt+Del" visible="false" onclick="sendCtrlAltDel();" title="send Ctrl+Alt+Del to the remote session"/>
-
-            </div>
-
-            <%-- remote session display --%>
-            <div id="displayDiv"></div>
-
-            <%-- remote session helpers --%>
-            <div id="statDiv"></div>
-		    <div id="debugDiv"></div>
-            <div id="msgDiv"></div>
-            <div id="kbhDiv"></div>
-            <div id="bgfDiv"></div>
-
-        </form>
-
-        <script type="text/javascript" language="javascript" defer="defer">
-
-		    // browser size. default 1024x768
-		    function setClientResolution()
-		    {
-		        var display = new Display();
-		        document.getElementById('<%=width.ClientID%>').value = display.getBrowserWidth();
-		        document.getElementById('<%=height.ClientID%>').value = display.getBrowserHeight();
-		    }
-
-		</script>
-
+        
+        <div class="row">
+            <div class="left-pane" ui-view="left" style="width:20%; display:inline-block; background-color:#BBBBBB; float:left;"></div>
+            <div class="main-pane" ui-view="main" style="width:70%; display:inline-block; background-color:#808080; float:left;"></div>
+            <div class="rigth-pane" ui-view="right" style="width:9%; display:inline-block; background-color:#555555; float:left;"></div>
+        </div>
 	</body>
 
 </html>

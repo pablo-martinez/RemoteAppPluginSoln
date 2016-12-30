@@ -187,6 +187,8 @@
     <Content Include="img\program\rdp.png" />
     <Content Include="img\test.webp" />
     <Content Include="js\app\app.js" />
+    <Content Include="js\app\common\modal\components\modalComponent.js" />
+    <Content Include="js\app\common\modal\templates\modalTemplate.html" />
     <Content Include="js\app\main\controllers\rightController.js" />
     <Content Include="js\app\main\controllers\mainController.js" />
     <Content Include="js\app\main\controllers\leftController.js" />

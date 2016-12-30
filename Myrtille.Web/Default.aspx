@@ -39,11 +39,12 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
 
         <!-- Bootstrap -->
-        <!-- <script language="javascript" type="text/javascript" src="js/bootstrap/ui-bootstrap-tpls-2.3.2.min.js"></script> -->
+        <script language="javascript" type="text/javascript" src="js/bootstrap/ui-bootstrap-tpls-2.3.2.min.js"></script>
         
 
         <%--<script language="javascript" type="text/javascript" src="//code.jquery.com/jquery-3.1.1.slim.min.js"></script> --%>
         <script language="javascript" type="text/javascript" src="js/app/app.js"></script>
+        <script language="javascript" type="text/javascript" src="js/app/common/modal/components/modalComponent.js"></script>
 
         <script language="javascript" type="text/javascript" src="js/app/RemoteDesktop/services/RemoteDesktop.js"></script>
 
@@ -58,9 +59,9 @@
         </script>
         
         <div class="row">
-            <div class="left-pane" ui-view="left" style="width:20%; display:inline-block; background-color:#BBBBBB; float:left;"></div>
-            <div class="main-pane" ui-view="main" style="width:70%; display:inline-block; background-color:#808080; float:left;"></div>
-            <div class="rigth-pane" ui-view="right" style="width:9%; display:inline-block; background-color:#555555; float:left;"></div>
+            <div id="left-pane" ui-view="left" style="display:inline-block; background-color:#BBBBBB; float:left;"></div>
+            <div id="main-pane" ui-view="main" style="display:inline-block; background-color:#808080; float:left;"></div>
+            <div id="rigth-pane" ui-view="right" style="display:inline-block; background-color:#555555; float:left;"></div>
         </div>
 	</body>
 

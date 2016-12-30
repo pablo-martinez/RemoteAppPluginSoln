@@ -4,17 +4,20 @@
   clear: both;
 }
 
-.left-pane {
+#left-pane {
     max-height: 100vh;
     overflow: auto;
 }
 
-.main-pane {
+#main-pane {
+    max-height: 100vh;
+}
+
+#right-pane {
     max-height: 100vh;
     overflow: auto;
 }
 
-.right-pane {
-    max-height: 100vh;
-    overflow: auto;
+.hidden {
+    display:none;
 }

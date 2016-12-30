@@ -1,21 +1,23 @@
-﻿<!-- virtual keyboard. on devices without a physical keyboard, forces the device virtual keyboard to pop up -->
-<input type="button" id="keyboard" value="Keyboard" visible="false" onclick="openPopup('virtualKeyboardPopup', 'VirtualKeyboard.aspx');" title="send text to the remote session" />
+﻿<div class="hidden">
+    <!-- virtual keyboard. on devices without a physical keyboard, forces the device virtual keyboard to pop up -->
+    <input type="button" id="keyboard" value="Keyboard" visible="false" onclick="openPopup('virtualKeyboardPopup', 'VirtualKeyboard.aspx');" title="send text to the remote session" />
 
-<!-- remote clipboard. display the remote clipboard content and allow to copy it locally (text only) -->
-<input type="button" id="clipboard" value="Clipboard" visible="false" onclick="doXhrCall('RemoteClipboard.aspx');" title="retrieve the remote clipboard content (text only)" />
+    <!-- remote clipboard. display the remote clipboard content and allow to copy it locally (text only) -->
+    <input type="button" id="clipboard" value="Clipboard" visible="false" onclick="doXhrCall('RemoteClipboard.aspx');" title="retrieve the remote clipboard content (text only)" />
 
-<!-- upload/download file(s). only enabled if the connected server is localhost or if a domain is specified (so file(s) can be accessed within the rdp session) -->
-<input type="button" id="files" value="My Documents" visible="false" onclick="openPopup('fileStoragePopup', 'FileStorage.aspx');" title="upload/download files to/from the user documents folder" />
+    <!-- upload/download file(s). only enabled if the connected server is localhost or if a domain is specified (so file(s) can be accessed within the rdp session) -->
+    <input type="button" id="files" value="My Documents" visible="false" onclick="openPopup('fileStoragePopup', 'FileStorage.aspx');" title="upload/download files to/from the user documents folder" />
 
-<!-- send ctrl+alt+del to the rdp session. may be useful to change the user password, for example -->
-<input type="button" id="cad" value="Ctrl+Alt+Del" visible="false" onclick="sendCtrlAltDel();" title="send Ctrl+Alt+Del to the remote session" />
+    <!-- send ctrl+alt+del to the rdp session. may be useful to change the user password, for example -->
+    <input type="button" id="cad" value="Ctrl+Alt+Del" visible="false" onclick="sendCtrlAltDel();" title="send Ctrl+Alt+Del to the remote session" />
 
-<!-- remote session display -->
-<div id="displayDiv"></div>
+    <!-- remote session display -->
+    <div id="displayDiv"></div>
 
-<!-- remote session helpers -->
-<div id="statDiv"></div>
-<div id="debugDiv"></div>
-<div id="msgDiv"></div>
-<div id="kbhDiv"></div>
-<div id="bgfDiv"></div>
+    <!-- remote session helpers -->
+    <div id="statDiv"></div>
+    <div id="debugDiv"></div>
+    <div id="msgDiv"></div>
+    <div id="kbhDiv"></div>
+    <div id="bgfDiv"></div>
+</div>

@@ -73,6 +73,16 @@ namespace Myrtille.Web
                 var programName = string.IsNullOrEmpty(program) ? "Remote Desktop" : "Remote Apps";
                 sessionId = $"{userName} - {programName}";//Guid.NewGuid().ToString().Substring(0, 8);
 
+                if (RemoteSessionManager.CurrentSessions.ContainsKey(sessionId))
+                {
+                    if (string.IsNullOrEmpty(program))
+                    {
+                        HttpContext.Current.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                        HttpContext.Current.Response.Write($"{{\"message\":\"There is already an active session for the requested connection.\"}}");
+                        return;
+                    }
+                }
+
                 // create the remote session manager
                 remoteSessionManager = new RemoteSessionManager(
                     new RemoteSession

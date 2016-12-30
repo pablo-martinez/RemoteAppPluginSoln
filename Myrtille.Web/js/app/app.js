@@ -1,4 +1,4 @@
-﻿var app = angular.module("myrtille", ['ui.router']);
+﻿var app = angular.module("myrtille", ['ui.router', 'ui.bootstrap']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 

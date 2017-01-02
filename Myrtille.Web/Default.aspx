@@ -61,7 +61,7 @@
         <div class="row">
             <div id="left-pane" ui-view="left" style="display:inline-block; background-color:#BBBBBB; float:left;"></div>
             <div id="main-pane" ui-view="main" style="display:inline-block; background-color:#808080; float:left;"></div>
-            <div id="rigth-pane" ui-view="right" style="display:inline-block; background-color:#555555; float:left;"></div>
+            <div id="rigth-pane" ui-view="right" style="    display:inline-block; background-color:#555555; float:left;"></div>
         </div>
 	</body>
 

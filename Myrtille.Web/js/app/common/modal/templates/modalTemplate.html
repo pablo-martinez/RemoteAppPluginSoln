@@ -2,9 +2,9 @@
     <h3 class="modal-title" id="modal-title">{{$ctrl.title}}</h3>
 </div>
 <div class="modal-body" id="modal-body">
-    {{$ctrl.content}}
+    <p ng-repeat="message in $ctrl.messages">{{message}}</p>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-    <!--<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>-->
+    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()" ng-show="$ctrl.showCancelButton">Cancel</button>
 </div>

@@ -24,6 +24,31 @@
                     vm.currentSessions = currentSessions;
                 });
             }, 2000);
+
+            window.onSessionDisconnect = function () {
+                if (RemoteDesktop.session.sessionId) {
+                    var modalInstance = $uibModal.open({
+                        component: 'modalComponent',
+                        resolve: {
+                            title: function () {
+                                return "Oops!";
+                            },
+                            content: function () {
+                                return "The session you are currently working on has been closed.";
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function () {
+                        window.location.reload();
+                    }, function () {
+                        window.location.reload();
+                    });
+                }
+                else {
+                    window.location.reload();
+                }
+            }
         }
         
         function startConnection(configID, program) {
@@ -49,6 +74,7 @@
             angular.element(document.getElementById("main-pane").children[0]).removeClass("hidden");
 
             vm.openSessionId = sessionId;
+            RemoteDesktop.session.sessionId = sessionId;
             startMyrtille(sessionId, true, 8181, null, false, false, false);
         }
     }

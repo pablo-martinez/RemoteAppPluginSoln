@@ -63,8 +63,8 @@ namespace Myrtille.Web
                 var userDomain = sessionConfig.UserDomain;//HttpContext.Current.Request.QueryString["userDomain"];
                 var userName = sessionConfig.UserName;// HttpContext.Current.Request.QueryString["userName"];
                 var userPassword = sessionConfig.UserPassword;//HttpContext.Current.Request.QueryString["userPassword"];
-                var clientWidth = "1440";//HttpContext.Current.Request.QueryString["clientWidth"];
-                var clientHeight = "810";// HttpContext.Current.Request.QueryString["clientHeight"];
+                var clientWidth = "1200";//HttpContext.Current.Request.QueryString["clientWidth"];
+                var clientHeight = "600";// HttpContext.Current.Request.QueryString["clientHeight"];
                 var statMode = false;// HttpContext.Current.Request.QueryString["statMode"] == "true";
                 var debugMode = false;//HttpContext.Current.Request.QueryString["bandwidthRatio"] == "true";
                 var compatibilityMode = false;//HttpContext.Current.Request.QueryString["bandwidthRatio"] == "true";
@@ -75,12 +75,9 @@ namespace Myrtille.Web
 
                 if (RemoteSessionManager.CurrentSessions.ContainsKey(sessionId))
                 {
-                    if (string.IsNullOrEmpty(program))
-                    {
-                        HttpContext.Current.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                        HttpContext.Current.Response.Write($"{{\"message\":\"There is already an active session for the requested connection.\"}}");
-                        return;
-                    }
+                    HttpContext.Current.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    HttpContext.Current.Response.Write($"{{\"message\":\"There is already an active session for the requested connection.\"}}");
+                    return;
                 }
 
                 // create the remote session manager

@@ -6,7 +6,9 @@
     RemoteDesktop.$inject = ['$http'];
     function RemoteDesktop($http) {
         var service = {
+            session: { sessionId: undefined },
             startConnection: startConnection,
+            disconnect: disconnect,
             currentSessions: currentSessions
         };
 
@@ -20,7 +22,14 @@
             });
         }
 
-        function currentSessions(data) {
+        function disconnect() {
+            return $http.post('Disconnect.aspx', { sessionId: service.session.sessionId }).then(function (response) {
+                service.session.sessionId = undefined;
+                return;
+            });
+        }
+
+        function currentSessions() {
             return $http.post('CurrentSessions.aspx').then(function (response) {
                 return response.data.currentSessions;
             });

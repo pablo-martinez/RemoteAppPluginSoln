@@ -244,7 +244,8 @@ function Websocket(config, dialog, display, network)
                             '|' + config.getHttpSessionId());
 
                         // the remote session is disconnected, back to home page
-                        window.location.href = config.getHttpServerUrl();
+                        // TODO: we should refactor this to make it an angular service and communicate to RemoteDesktop service
+                        angular.isFunction(window.onSessionDisconnect) && window.onSessionDisconnect();
                     }
                 }
                 // server ack

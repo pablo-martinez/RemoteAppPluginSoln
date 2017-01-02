@@ -46,8 +46,8 @@ function Canvas(config, dialog, display)
             else
             {
                 // set canvas properties (same size as browser and a tab index so it can be focused)
-                canvasObject.width = 1440;//display.getBrowserWidth();
-                canvasObject.height = 810;//display.getBrowserHeight();
+                canvasObject.width = 1200;//display.getBrowserWidth();
+                canvasObject.height = 600;//display.getBrowserHeight();
                 canvasObject.setAttribute('tabindex', '0');
 
                 display.getDisplayDiv().appendChild(canvasObject);

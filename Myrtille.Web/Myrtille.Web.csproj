@@ -96,6 +96,13 @@
       <DependentUpon>CurrentSessions.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\SessionConfig.cs" />
+    <Compile Include="Disconnect.aspx.cs">
+      <DependentUpon>Disconnect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disconnect.aspx.designer.cs">
+      <DependentUpon>Disconnect.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StartConnection.aspx.cs">
       <DependentUpon>StartConnection.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -207,6 +214,7 @@
     <Content Include="js\user\touchscreen.js" />
     <Content Include="RemoteClipboard.aspx" />
     <Content Include="CurrentSessions.aspx" />
+    <Content Include="Disconnect.aspx" />
     <Content Include="StartConnection.aspx" />
     <Content Include="ShowDialog.aspx" />
     <Content Include="templates\partial-home-right.html" />

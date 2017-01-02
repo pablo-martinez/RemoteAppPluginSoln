@@ -17,11 +17,11 @@
                     component: 'modalComponent',
                     resolve: {
                         title: function () {
-                            return "Do you really want to disconnect this session? ";
+                            return "Do you want to close this session? ";
                         },
                         content: function () {
                             return ["Other users on this session will also be disconnected.",
-                            "If you do not want them to disconnect, just close the browser tab or reload the page."];
+                            "If you do not want to force them to disconnect, just close the browser tab or reload the page."];
                         },
                         showCancelButton: function () {
                             return true;

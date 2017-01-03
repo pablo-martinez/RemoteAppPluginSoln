@@ -7,9 +7,15 @@
     function MainController(RemoteDesktop, $uibModal) {
         var vm = this;
 
+        vm.session = RemoteDesktop.session;
+        vm.showClipboard = showClipboard;
         vm.disconnect = disconnect;
 
         ////////////
+
+        function showClipboard() {
+            doXhrCall('RemoteClipboard.aspx?sessionId=' + RemoteDesktop.session.sessionId);
+        }
 
         function disconnect() {
             if (RemoteDesktop.session.sessionId) {
@@ -17,7 +23,7 @@
                     component: 'modalComponent',
                     resolve: {
                         title: function () {
-                            return "Do you want to close this session? ";
+                            return "Close this session?";
                         },
                         content: function () {
                             return ["Other users on this session will also be disconnected.",

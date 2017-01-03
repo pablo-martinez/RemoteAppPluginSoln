@@ -12,12 +12,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta name="viewport" content="initial-scale=1.0"/>
         <title>Myrtille</title>
-        <link rel="stylesheet" type="text/css" href="css/Default.css"/>
-        <link rel="stylesheet" type="text/css" href="css/myrtille.css"/>
+        
         <!-- Bootstrap Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- Bootstrap Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="css/Default.css"/>
+        <link rel="stylesheet" type="text/css" href="css/myrtille.css"/>
 
         <script language="javascript" type="text/javascript" src="js/myrtille.js"></script>
         <script language="javascript" type="text/javascript" src="js/config.js"></script>

@@ -40,8 +40,13 @@ namespace Myrtille.Web
 
             try
             {
-                // retrieve the remote session manager for the current http session
-                remoteSessionManager = (RemoteSessionManager)HttpContext.Current.Session[HttpSessionStateVariables.RemoteSessionManager.ToString()];
+                var sessionId = HttpContext.Current.Request.QueryString["sessionId"];
+
+                // retrieve the remote session manager for the requested session
+                if (RemoteSessionManager.CurrentSessions.ContainsKey(sessionId))
+                {
+                    remoteSessionManager = RemoteSessionManager.CurrentSessions[sessionId];
+                }
             }
             catch (Exception exc)
             {

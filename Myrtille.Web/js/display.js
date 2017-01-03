@@ -217,16 +217,16 @@ function Display(config, dialog)
             {
                 if (config.getAdditionalLatency() > 0)
                 {
-                    window.setTimeout(function () { document.body.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto'; }, Math.round(config.getAdditionalLatency() / 2));
+                    window.setTimeout(function () { displayDiv.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto'; }, Math.round(config.getAdditionalLatency() / 2));
                 }
                 else
                 {
-                    document.body.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto';
+                    displayDiv.style.cursor = 'url(' + config.getHttpServerUrl() + 'GetUpdate.aspx?sessionId=' + config.getHttpSessionId() + '&imgIdx=' + idx + '&noCache=' + new Date().getTime() + ') ' + xHotSpot + ' ' + yHotSpot + ', auto';
                 }
             }
             else
             {
-                document.body.style.cursor = 'url(\'data:image/png;base64,' + base64Data + '\') ' + xHotSpot + ' ' + yHotSpot + ', auto';
+                displayDiv.style.cursor = 'url(\'data:image/png;base64,' + base64Data + '\') ' + xHotSpot + ' ' + yHotSpot + ', auto';
             }
         }
 	    catch (exc)

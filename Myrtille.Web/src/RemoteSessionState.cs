@@ -20,7 +20,7 @@ namespace Myrtille.Web
 {
     public enum RemoteSessionState
     {
-        NotConnected = 0,
+        NotConnected = 0, 
         Connecting = 1,
         Connected = 2,
         Disconnecting = 3,

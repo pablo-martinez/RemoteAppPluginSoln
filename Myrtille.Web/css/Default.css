@@ -4,6 +4,7 @@
 
 #left-pane {
     max-height: 100vh;
+    min-width: 298px;
     overflow: auto;
 }
 

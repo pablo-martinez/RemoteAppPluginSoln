@@ -25,7 +25,7 @@ namespace Myrtille.Web
             {
                 ID = NextID,
                 ServerAddress = "127.0.0.2",
-                UserDomain = "PMartinez-PC",
+                UserDomain = "",
                 UserName = "test",
                 UserPassword = "test",
                 Programs = new List<string> { "", "notepad", "calc", "chrome" }
@@ -34,7 +34,7 @@ namespace Myrtille.Web
             {
                 ID = NextID,
                 ServerAddress = "127.0.0.2",
-                UserDomain = "PMartinez-PC",
+                UserDomain = "",
                 UserName = "test1",
                 UserPassword = "test",
                 Programs = new List<string> { "", "notepad", "calc", "chrome" }
@@ -43,7 +43,7 @@ namespace Myrtille.Web
             {
                 ID = NextID,
                 ServerAddress = "127.0.0.2",
-                UserDomain = "PMartinez-PC",
+                UserDomain = "",
                 UserName = "test2",
                 UserPassword = "test",
                 Programs = new List<string> { "", "notepad", "calc", "chrome" }
@@ -52,7 +52,7 @@ namespace Myrtille.Web
             {
                 ID = NextID,
                 ServerAddress = "127.0.0.2",
-                UserDomain = "PMartinez-PC",
+                UserDomain = "",
                 UserName = "test3",
                 UserPassword = "test",
                 Programs = new List<string> { "", "notepad", "calc", "chrome" }
@@ -61,7 +61,7 @@ namespace Myrtille.Web
             {
                 ID = NextID,
                 ServerAddress = "127.0.0.2",
-                UserDomain = "PMartinez-PC",
+                UserDomain = "",
                 UserName = "test4",
                 UserPassword = "test",
                 Programs = new List<string> { "", "notepad", "calc", "chrome" }
@@ -70,7 +70,7 @@ namespace Myrtille.Web
             {
                 ID = NextID,
                 ServerAddress = "127.0.0.2",
-                UserDomain = "PMartinez-PC",
+                UserDomain = "",
                 UserName = "test5",
                 UserPassword = "test",
                 Programs = new List<string> { "", "notepad", "calc", "chrome" }

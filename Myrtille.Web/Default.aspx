@@ -14,12 +14,13 @@
         <title>Myrtille</title>
         
         <!-- Bootstrap Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/vendor/bootstrap/bootstrap.min.css" />
         <!-- Bootstrap Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/vendor/bootstrap/bootstrap-theme.min.css" />
 
-        <link rel="stylesheet" type="text/css" href="css/Default.css"/>
-        <link rel="stylesheet" type="text/css" href="css/myrtille.css"/>
+        <!-- Site css -->
+        <link rel="stylesheet" type="text/css" href="css/Default.css" />
+        <link rel="stylesheet" type="text/css" href="css/myrtille.css" />
 
         <script language="javascript" type="text/javascript" src="js/myrtille.js"></script>
         <script language="javascript" type="text/javascript" src="js/config.js"></script>
@@ -37,11 +38,12 @@
         <script language="javascript" type="text/javascript" src="js/user/mouse.js"></script>
         <script language="javascript" type="text/javascript" src="js/user/touchscreen.js"></script>
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="js/vendor/angular/angular.min.js"></script>
+        <script type="text/javascript" src="js/vendor/angular/angular-animate.min.js"></script>
+        <script type="text/javascript" src="js/vendor/angular-router/angular-ui-router.min.js"></script>
 
         <!-- Bootstrap -->
-        <script language="javascript" type="text/javascript" src="js/bootstrap/ui-bootstrap-tpls-2.3.2.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/vendor/angular-bootstrap/ui-bootstrap-tpls-2.3.2.min.js"></script>
         
 
         <%--<script language="javascript" type="text/javascript" src="//code.jquery.com/jquery-3.1.1.slim.min.js"></script> --%>

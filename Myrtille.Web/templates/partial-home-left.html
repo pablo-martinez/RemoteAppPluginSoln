@@ -1,14 +1,17 @@
-﻿<div ng-hide="left.openSessionId">
+﻿<div class="container-fluid" ng-hide="left.openSessionId">
     <h3 style="text-align:center">New session</h3>
-    <div class="container-fluid">
-        <div class="row" ng-repeat="config in left.availableConfigs" style="margin: 10px auto">
-            <div>{{config.UserName}}</div><button class="btn btn-default" ng-repeat="program in config.Programs" ng-click="left.startConnection(config.ID, program);"><img style="width:25px;height:25px;" ng-src="/Myrtille/img/program/{{program || 'rdp'}}.png" /></button>
+    <uib-accordion close-others="false">
+        <div uib-accordion-group class="panel-default" heading="{{config.UserName}}" ng-repeat="config in left.availableConfigs" is-open="config.isPanelOpen">
+            <uib-accordion-heading>
+                {{config.UserName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': config.isPanelOpen, 'glyphicon-chevron-right': !config.isPanelOpen}"></i>
+            </uib-accordion-heading>
+            <button class="btn btn-default" style="margin:4px" ng-repeat="program in config.Programs" ng-click="left.startConnection(config.ID, program);"><img style="width:25px;height:25px;" ng-src="/Myrtille/img/program/{{program || 'rdp'}}.png" /></button>
         </div>
-    </div>
+    </uib-accordion>
 
     <h3 style="text-align:center">Join session ({{left.currentSessions.length}})</h3>
     <div class="container-fluid" ng-show="left.currentSessions.length">
-        <div class="row"  style="margin: 10px auto" ng-repeat="session in left.currentSessions"><button class="btn btn-primary" ng-click="left.joinConnection(session);">Join {{session}}</button></div>
+        <div class="row text-center"  style="margin: 10px auto" ng-repeat="session in left.currentSessions"><button class="btn btn-primary" ng-click="left.joinConnection(session);">{{session}}</button></div>
     </div>
     <div ng-hide="left.currentSessions.length" style="text-align:center;color: #a11111">No current sessions</div>
 </div>

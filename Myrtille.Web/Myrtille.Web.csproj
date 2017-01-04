@@ -186,6 +186,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\Default.css" />
+    <Content Include="css\vendor\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="css\vendor\bootstrap\bootstrap.min.css" />
+    <Content Include="css\vendor\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\vendor\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="css\vendor\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="css\vendor\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="css\vendor\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="css\vendor\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="FileStorage.aspx" />
     <Content Include="img\bandwidthTest.png" />
     <Content Include="img\program\calc.png" />
@@ -200,7 +208,7 @@
     <Content Include="js\app\main\controllers\mainController.js" />
     <Content Include="js\app\main\controllers\leftController.js" />
     <Content Include="js\app\RemoteDesktop\services\RemoteDesktop.js" />
-    <Content Include="js\bootstrap\ui-bootstrap-tpls-2.3.2.min.js" />
+    <Content Include="js\vendor\angular-bootstrap\ui-bootstrap-tpls-2.3.2.min.js" />
     <Content Include="js\config.js" />
     <Content Include="js\display\canvas.js" />
     <Content Include="js\display\divs.js" />
@@ -212,6 +220,9 @@
     <Content Include="js\network\longpolling.js" />
     <Content Include="js\network\xmlhttp.js" />
     <Content Include="js\user\touchscreen.js" />
+    <Content Include="js\vendor\angular-router\angular-ui-router.min.js" />
+    <Content Include="js\vendor\angular\angular-animate.min.js" />
+    <Content Include="js\vendor\angular\angular.min.js" />
     <Content Include="RemoteClipboard.aspx" />
     <Content Include="CurrentSessions.aspx" />
     <Content Include="Disconnect.aspx" />
@@ -239,6 +250,13 @@
     <Content Include="log\README" />
     <Content Include="ssl\README" />
     <Content Include="packages.config" />
+    <Content Include="css\vendor\bootstrap\bootstrap-theme.min.css.map" />
+    <Content Include="css\vendor\bootstrap\bootstrap.min.css.map" />
+    <Content Include="css\vendor\fonts\fontawesome-webfont.eot" />
+    <Content Include="css\vendor\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\vendor\fonts\fontawesome-webfont.woff" />
+    <Content Include="css\vendor\fonts\fontawesome-webfont.woff2" />
+    <Content Include="css\vendor\fonts\FontAwesome.otf" />
     <None Include="Web.Base.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

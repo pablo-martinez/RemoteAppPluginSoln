@@ -25,6 +25,10 @@ function User(config, dialog, display, network)
     // adaptive fullscreen update
     var adaptiveFullscreenTimeout = null;
 
+    // event handling
+    var eventListener = function() {};
+    this.addListener = function(eventType, listener, useCapture) { return eventListener(eventType, listener, useCapture); };
+
     // keyboard
     var keyboard = null;
 
@@ -38,6 +42,23 @@ function User(config, dialog, display, network)
     {
         try
         {
+            // W3C standard
+            if (window.addEventListener)
+            {
+                //dialog.showDebug('event handling: using window.addEventListener');
+                eventListener = window.addEventListener;
+            }
+            // IE < 9
+            else if (document.attachEvent)
+            {
+                //dialog.showDebug('event handling: using document.attachEvent');
+                eventListener = function(eventType, listener, useCapture)
+                {
+                    // attachEvent wants 'oneventType' instead of 'eventType'
+                    document.attachEvent('on' + eventType, listener, useCapture);
+                };
+            }
+
             keyboard = new Keyboard(config, dialog, display, network, this);
             keyboard.init();
 

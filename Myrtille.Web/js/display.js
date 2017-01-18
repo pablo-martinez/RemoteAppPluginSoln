@@ -23,7 +23,7 @@
 function Display(config, dialog)
 {
     // display div
-    var displayDiv = null;
+    var displayDiv = document.getElementById('displayDiv');
     this.getDisplayDiv = function() { return displayDiv; }
     this.getHorizontalOffset = function() { return displayDiv.offsetLeft; };
     this.getVerticalOffset = function() { return displayDiv.offsetTop; };
@@ -42,7 +42,6 @@ function Display(config, dialog)
             //dialog.showDebug('browser: ' + navigator.userAgent + ', width: ' + this.getBrowserWidth() + ', height: ' + this.getBrowserHeight());
 
             // use a div markup to render the display, instead of document body, for a better position handling
-            displayDiv = document.getElementById('displayDiv');
             if (displayDiv == null)
             {
                 alert('missing displayDiv element! can\'t render display');
@@ -147,6 +146,20 @@ function Display(config, dialog)
 
         return 768;
     };
+
+    this.getToolbarHeight = function()
+    {
+        var controlInfo = document.createElement('div');
+        controlInfo.className = 'controlInfo';
+        document.body.appendChild(controlInfo);
+
+        var height = controlInfo.clientHeight;
+        //alert('toolbar height: ' + height);
+
+        document.body.removeChild(controlInfo);
+
+        return height;
+	}
 
     this.isFirefoxBrowser = function()
     {

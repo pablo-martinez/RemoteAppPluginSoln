@@ -26,45 +26,12 @@ function Mouse(config, dialog, display, network, user)
     {
         try
         {
-            var element;
-
-            if (config.getCanvasEnabled())
-            {
-                //dialog.showDebug('mouse: using canvas element');
-                element = display.getCanvas().getCanvasObject();
-            }
-            else
-            {
-                //dialog.showDebug('mouse: using document element');
-                element = document;
-            }
-
-            // IE
-            if (display.isIEBrowser())
-            {
-                element.attachEvent("onmousemove", function(e) { mouseMove(e); });
-                element.attachEvent("onmousedown", function(e) { mouseClick(e, 1); });
-                element.attachEvent("onmouseup", function(e) { mouseClick(e, 0); });
-                element.attachEvent("onmousewheel", function(e) { mouseScroll(e); });
-                element.attachEvent("onselectstart", function() { return false; });
-                element.attachEvent("oncontextmenu", function(e) { user.cancelEvent(e); return false; });
-            }
-            // others
-            else
-            {
-                element.onmousemove = function(e) { mouseMove(e); };
-                element.onmousedown = function(e) { mouseClick(e, 1); };
-                element.onmouseup = function(e) { mouseClick(e, 0); };
-                
-                // firefox
-                if (display.isFirefoxBrowser())
-                    element.addEventListener('DOMMouseScroll', function(e) { mouseScroll(e); }, false);
-                else
-                    element.onmousewheel = function(e) { mouseScroll(e); };
-                
-                element.onselectstart = function() { return false; };
-                element.oncontextmenu = function(e) { user.cancelEvent(e); return false; };
-            }
+            user.addListener('mousemove', function(e) { mouseMove(e); });
+            user.addListener('mousedown', function(e) { mouseClick(e, 1); });
+            user.addListener('mouseup', function(e) { mouseClick(e, 0); });
+            user.addListener(display.isFirefoxBrowser() ? 'DOMMouseScroll' : 'mousewheel', function(e) { mouseScroll(e); });
+            user.addListener('selectstart', function() { return false; });
+            user.addListener('contextmenu', function(e) { user.cancelEvent(e); return false; });
         }
         catch (exc)
         {
@@ -204,7 +171,7 @@ function Mouse(config, dialog, display, network, user)
                 user.triggerActivity();
 
             // IE
-            if (display.isIEBrowser())
+            if (display.isIEBrowser() && display.getIEVersion() < 9)
             {
                 switch (e.button)
                 {

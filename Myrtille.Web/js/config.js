@@ -40,7 +40,7 @@ function Config(
 
     // display
     var canvasEnabled = true;                           // 2d canvas; requires an HTML5 browser (fallback to divs if disabled or not supported)
-    var imageEncoding = 'JPEG';                         // image encoding format; possible values: PNG, JPEG, PNG_JPEG, WEBP (see comments about pros and cons of each format in display.js)
+    var imageEncoding = 'PNG_JPEG';                     // image encoding format; possible values: PNG, JPEG, PNG_JPEG, WEBP (see comments about pros and cons of each format in display.js)
     var imageQuality = 50;                              // image quality (%) higher = better; not applicable for PNG (lossless); tweaked dynamically to fit the available bandwidth if using JPEG, PNG_JPEG or WEBP encoding. for best user experience, fullscreen updates are always done in higher quality (75%), regardless of this setting and bandwidth
     var imageCountOk = 500;                             // reasonable number of images to display at once; for HTML4 (divs), used to clean the DOM (by requesting a fullscreen update) as too many divs may slow down the browser; not applicable for HTML5 (canvas)
     var imageCountMax = 1000;                           // maximal number of images to display at once; for HTML4 (divs), used to clean the DOM (by reloading the page) as too many divs may slow down the browser; not applicable for HTML5 (canvas)

@@ -26,33 +26,9 @@ function Keyboard(config, dialog, display, network, user)
     {
         try
         {
-            var element;
-
-            if (config.getCanvasEnabled())
-            {
-                //dialog.showDebug('keyboard: using canvas element');
-                element = display.getCanvas().getCanvasObject();
-            }
-            else
-            {
-                //dialog.showDebug('keyboard: using document element');
-                element = document;
-            }
-
-            // IE
-            if (display.isIEBrowser())
-            {
-                element.attachEvent("onkeydown", function(e) { keyDown(e); });
-                element.attachEvent("onkeypress", function(e) { keyPress(e); });
-                element.attachEvent("onkeyup", function(e) { keyUp(e); });
-            }
-            // others
-            else
-            {
-                element.onkeydown = function(e) { keyDown(e); };
-                element.onkeypress = function(e) { keyPress(e); };
-                element.onkeyup = function(e) { keyUp(e); };
-            }
+            user.addListener('keydown', function(e) { keyDown(e); });
+            user.addListener('keypress', function(e) { keyPress(e); });
+            user.addListener('keyup', function(e) { keyUp(e); });
         }
         catch (exc)
         {

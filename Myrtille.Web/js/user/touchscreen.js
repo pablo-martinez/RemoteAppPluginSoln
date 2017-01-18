@@ -26,33 +26,9 @@ function Touchscreen(config, dialog, display, network, user)
     {
         try
         {
-            var element;
-
-            if (config.getCanvasEnabled())
-            {
-                //dialog.showDebug('touch: using canvas element');
-                element = display.getCanvas().getCanvasObject();
-            }
-            else
-            {
-                //dialog.showDebug('touch: using document element');
-                element = document;
-            }
-
-            // IE
-            if (display.isIEBrowser())
-            {
-                element.attachEvent("ontouchmove", function(e) { touchMove(e); });
-                element.attachEvent("ontouchstart", function(e) { touchTap(e, 1); });
-                element.attachEvent("ontouchend", function(e) { touchTap(e, 0); });
-            }
-            // others
-            else
-            {
-                element.ontouchmove = function(e) { touchMove(e); };
-                element.ontouchstart = function(e) { touchTap(e, 1); };
-                element.ontouchend = function(e) { touchTap(e, 0); };
-            }
+            user.addListener('touchmove', function(e) { touchMove(e); });
+            user.addListener('touchstart', function(e) { touchTap(e, 1); });
+            user.addListener('touchend', function(e) { touchTap(e, 0); });
         }
         catch (exc)
         {

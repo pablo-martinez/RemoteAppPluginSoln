@@ -63,8 +63,8 @@ namespace Myrtille.Web
             MapTable.Add(55, 8);           // 7
             MapTable.Add(56, 9);           // 8
             MapTable.Add(57, 10);          // 9
-            //MapTable.Add(65, 30);        // a qwerty
-            MapTable.Add(65, 16);          // a azerty
+            MapTable.Add(65, 30);          // a qwerty
+            //MapTable.Add(65, 16);        // a azerty
             MapTable.Add(66, 48);          // b
             MapTable.Add(67, 46);          // c
             MapTable.Add(68, 32);          // d
@@ -76,24 +76,24 @@ namespace Myrtille.Web
             MapTable.Add(74, 36);          // j
             MapTable.Add(75, 37);          // k
             MapTable.Add(76, 38);          // l
-            //MapTable.Add(77, 50);        // m qwerty
-            MapTable.Add(77, 39);          // m azerty
+            MapTable.Add(77, 50);          // m qwerty
+            //MapTable.Add(77, 39);        // m azerty
             MapTable.Add(78, 49);          // n
             MapTable.Add(79, 24);          // o
             MapTable.Add(80, 25);          // p
-            //MapTable.Add(81, 16);        // q qwerty
-            MapTable.Add(81, 30);          // q azerty
+            MapTable.Add(81, 16);          // q qwerty
+            //MapTable.Add(81, 30);        // q azerty
             MapTable.Add(82, 19);          // r
             MapTable.Add(83, 31);          // s
             MapTable.Add(84, 20);          // t
             MapTable.Add(85, 22);          // u
             MapTable.Add(86, 47);          // v
-            //MapTable.Add(87, 17);        // w qwerty
-            MapTable.Add(87, 44);          // w azerty
+            MapTable.Add(87, 17);          // w qwerty
+            //MapTable.Add(87, 44);        // w azerty
             MapTable.Add(88, 45);          // x
             MapTable.Add(89, 21);          // y
-            //MapTable.Add(90, 44);        // z qwerty
-            MapTable.Add(90, 17);          // z azerty
+            MapTable.Add(90, 44);          // z qwerty
+            //MapTable.Add(90, 17);        // z azerty
             MapTable.Add(91, 347);         // left window key
             MapTable.Add(92, 348);         // right window key
             MapTable.Add(93, 0);           // select key
@@ -126,20 +126,20 @@ namespace Myrtille.Web
             MapTable.Add(123, 88);         // f12
             MapTable.Add(144, 69);         // num lock
             MapTable.Add(145, 70);         // scroll lock
-            //MapTable.Add(186, 39);       // semi-colon qwerty
-            MapTable.Add(186, 50);         // semi-colon azerty
+            MapTable.Add(186, 39);         // semi-colon qwerty
+            //MapTable.Add(186, 50);       // semi-colon azerty
             MapTable.Add(187, 13);         // equal sign
             MapTable.Add(188, 51);         // comma
             MapTable.Add(189, 12);         // dash
             MapTable.Add(190, 52);         // period
             MapTable.Add(191, 53);         // forward slash
-            //MapTable.Add(192, 41);       // grave accent qwerty
-            MapTable.Add(192, 40);         // grave accent azerty
+            MapTable.Add(192, 41);         // grave accent qwerty
+            //MapTable.Add(192, 40);       // grave accent azerty
             MapTable.Add(219, 26);         // open bracket
             MapTable.Add(220, 43);         // back slash
             MapTable.Add(221, 27);         // close braket
-            //MapTable.Add(222, 40);       // single quote qwerty
-            MapTable.Add(222, 41);         // single quote azerty
+            MapTable.Add(222, 40);         // single quote qwerty
+            //MapTable.Add(222, 41);       // single quote azerty
         }
     }
 }

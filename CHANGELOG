@@ -1,4 +1,12 @@
-﻿2016-10-31 Version 1.3.1 (stable)
+﻿2016-12-22 Version 1.4.0 (stable)
+	the login screen and connection toolbar appearance are now fully customizable in css (also removed unnecessary info from the connection toolbar)
+	the remote session desktop is now sized to fit the browser container exactly (no scrollbars at start)
+	fixed user event binding on old and modern browsers (attachEvent vs addEventListener)
+	qwerty mapping is now enforced on non standard keyboard layouts
+	multiple remote sessions can now be opened in different browser tabs
+	updated the image encoding to provide a better display quality and lower bandwidth usage
+
+2016-10-31 Version 1.3.1 (stable)
 	re-enabled and updated WebP compression
 	improved WebP debug
 

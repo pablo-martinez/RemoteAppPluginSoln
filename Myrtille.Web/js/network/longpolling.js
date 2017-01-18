@@ -98,3 +98,46 @@ function LongPolling(config, dialog, display, network)
 	    }
     }
 }
+
+/*****************************************************************************************************************************************************************************************************/
+/*** External Calls                                                                                                                                                                                ***/
+/*****************************************************************************************************************************************************************************************************/
+
+var iframe = null;
+
+function doIFrameCall(url)
+{
+    try
+    {
+        // browsers are limited to a given number of simultaneous xhrs or websockets calls; iframes are a nice hack to circumvent that (mainly useful on old browsers)
+        iframe = document.createElement('iframe');
+        iframe.src = url;
+
+        document.body.appendChild(iframe);
+
+        var display = new Display();
+
+        // IE < 9
+        if (display.isIEBrowser() && display.getIEVersion() < 9)
+        {
+            iframe.attachEvent('onload', function() { removeIframe(); });
+        }
+        // others
+        else
+        {
+            iframe.onload = function() { removeIframe(); };
+        }
+    }
+    catch (exc)
+    {
+        alert('doIFrameCall error: ' + exc.Message);
+    }
+}
+
+function removeIframe()
+{
+    if (iframe != null)
+    {
+        document.body.removeChild(iframe);
+    }
+};

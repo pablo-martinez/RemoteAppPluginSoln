@@ -16,11 +16,96 @@
     limitations under the License.
 */
 
+/* user controls: login screen (before connection) */
+
+.controlDiv
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    width: 450px;
+    height: 300px;
+}
+
+.controlLabel
+{
+    float: left;
+    width: 200px;
+    margin-top: 2px;
+}
+
+/* to customize a specific control, remove it below and redefine its css */
+.serverText,
+.domainText,
+.userText,
+.passwordText,
+.programText
+{
+    width: 200px;
+    margin-top: 2px;
+}
+
+/* to customize a specific control, remove it below and redefine its css */
+.statSelect,
+.debugSelect,
+.browserSelect
+{
+    width: 204px;
+    margin-top: 2px;
+}
+
+.connectButton
+{
+    width: 204px;
+    margin-top: 2px;
+    margin-left: 200px;
+}
+
+/* user controls: connection info and control (after connection) */
+
+/* if you don't want any info and control, enable the css below (remove the whole toolbar above the session display) */
+.controlInfo
+{
+    /*
+    visibility: hidden;
+    display: none;
+    */
+    height: 28px;       /* fixed size */
+    overflow: auto;     /* scroll on small displays */
+}
+
+/* shown info and control */
+/* to customize a specific control, remove it below and redefine its css */
+.serverInfo,
+.disconnectButton,
+.keyboardButton,
+.clipboardButton,
+.filesButton,
+.cadButton
+{
+    /* customize me */
+}
+
+/* hidden info and control */
+.domainInfo,
+.userInfo,
+.passwordInfo,
+.programInfo,
+.statInfo,
+.debugInfo,
+.browserInfo
+{
+    visibility: hidden;
+    display: none;
+}
+
 /* background fader */
 
 #bgfDiv
 {
-    position: fixed;
+    position: absolute;
     visibility: hidden;
     display: none;
     left: 0px;
@@ -38,7 +123,8 @@
 
 .modalPopup
 {
-    position: fixed;
+    position: absolute;
+    overflow: hidden;
     left: 10%;
     top: 10%;
     width: 35%;
@@ -51,8 +137,8 @@
 
 #virtualKeyboardPopup
 {
-    width: 450px;
-    height: 210px;
+    width: 470px;
+    height: 230px;
     background-color: transparent;
 }
 
@@ -70,8 +156,8 @@
 
 #showDialogPopup
 {
-    width: 450px;
-    height: 230px;
+    width: 470px;
+    height: 250px;
 }
 
 #showDialogPopupDesc
@@ -108,7 +194,7 @@
 
 canvas
 {
-	position: relative;
+	position: absolute;
     z-index: 100;
 }
 
